@@ -1,0 +1,58 @@
+{% extends 'enroll/base.html' %}
+{% block content %}
+
+
+
+
+<div class="row"> <!--There are a total number of 12 columns in a row-->
+    <div class="col-sm-4"> <!-- col-sm-4 means the form will be in 4 columns -->
+        <h4 class="text-center alert alert-info">Add Student</h4>
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" class="btn btn-success" value="Add">
+
+        </form>
+    </div>
+    <div class="col-sm-8"> <!-- The offset 1 is to create a gap -->
+        <h4 class="text-center alert alert-info">Show Student Information</h4>
+        {% if stu %}
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Password</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for st in stu %}
+                        <tr>
+                            <th scope="row">{{st.id}}</td>
+                            <td>{{st.name}}</td>
+                            <td>{{st.email}}</td>
+                            <td>{{st.password}}</td>
+                            <td>
+                                <a href="{% url 'edit' st.id %}" class="btn btn-warning btn">Edit</a>
+                                <form action="{% url 'delete' st.id %}" method="post" class="d-inline"> <!-- d-inline will make the delete button in the same line with edit button-->
+                                    {% csrf_token %}
+                                    <input type="submit" class="btn btn-danger" value="Delete"> 
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <h4 class="text-center alert alert-warning">No Records Found</h4>
+        {% endif %}
+    </div>
+</div>
+
+
+
+
+
+{% endblock content %}

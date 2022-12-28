@@ -1,0 +1,18 @@
+{% extends 'enroll/base.html' %}
+{% block content %}
+
+
+<div class="row">
+    <div class="col-sm-8">
+        <h4 class=" alert alert-info">Edit Student Data</h4>
+        <form action="" method="post">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" class="btn btn-success" value="Edit">
+        </form>
+        
+    </div>
+</div>
+
+
+{% endblock content %}
